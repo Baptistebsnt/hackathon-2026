@@ -1,0 +1,12 @@
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/entity/Site.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/entity/SiteMaterial.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/CarbonFootprintApplication.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/config/SecurityConfig.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/controller/SiteController.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/dto/SiteRequest.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/service/CarbonCalculationService.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/repository/CarbonHistoryRepository.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/dto/SiteResponse.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/repository/SiteRepository.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/service/SiteService.java
+/Users/baptistedande/Documents/carbon-footprint/carbon-footprint-v2/backend/src/main/java/com/hackathon/carbon/entity/CarbonHistory.java
