@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: carbon_db
+    environment:
+      POSTGRES_DB: carbondb
+      POSTGRES_USER: carbon
+      POSTGRES_PASSWORD: carbon123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carbon -d carbondb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: carbon_api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/carbondb
+      SPRING_DATASOURCE_USERNAME: carbon
+      SPRING_DATASOURCE_PASSWORD: carbon123
+      JWT_SECRET: hackathon2026supersecretkey32chars!!
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./frontend
+    container_name: carbon_front
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+
+volumes:
+  postgres_data:
