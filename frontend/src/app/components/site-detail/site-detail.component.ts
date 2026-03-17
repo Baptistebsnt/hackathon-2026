@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SiteService, SiteResponse } from '../../services/site.service';
@@ -228,22 +228,26 @@ export class SiteDetailComponent implements OnInit {
   loading = true;
 
   constructor(
-    private route: ActivatedRoute,
-    private siteService: SiteService
-  ) {}
+  private route: ActivatedRoute,
+  private siteService: SiteService,
+  private cdr: ChangeDetectorRef
+) {}
 
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.siteService.getSiteById(id).subscribe({
-      next: (data) => {
-        this.site = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      },
-    });
-  }
+ngOnInit(): void {
+  const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.siteService.getSiteById(id).subscribe({
+    next: (data) => {
+      this.site = data;
+      this.loading = false;
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('Erreur API:', err);
+      this.loading = false;
+      this.cdr.detectChanges();
+    },
+  });
+}
 
   labelMaterial(type: string): string {
     const labels: Record<string, string> = {

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SiteService, SiteResponse } from '../../services/site.service';
@@ -314,25 +314,22 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       : 0;
   }
 
-  constructor(private siteService: SiteService) {}
+  constructor(private siteService: SiteService, private cdr: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    this.siteService.getAllSites().subscribe({
-      next: (data) => {
-        this.sites = data;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      },
-    });
-  }
+ngOnInit(): void {
+  this.siteService.getAllSites().subscribe({
+    next: (data) => {
+      this.sites = data;
+      this.loading = false;
+      this.cdr.detectChanges();
+      setTimeout(() => this.initCharts(), 100);
+    },
+    error: () => { this.loading = false; }
+  });
+}
 
-  ngAfterViewInit(): void {
-    // Les charts seront initialisés après le chargement des données via un setter ou un subject
-    // Pour le hackathon, on recharge après un délai
-    setTimeout(() => this.initCharts(), 800);
-  }
+ngAfterViewInit(): void {
+}
 
   private initCharts(): void {
     if (!this.sites.length) return;
